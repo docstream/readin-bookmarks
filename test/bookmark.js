@@ -84,7 +84,7 @@ describe("BookmarkService", function() {
         validShareSet: defaultDomain.validShareSet
       };
 
-    bsc.createBookmark(failingBody, params, {
+    bsc.create(failingBody, params, {
       MODEL_ERR: function(err) {
         err.should.not.be.null;
         done();
@@ -107,7 +107,7 @@ describe("BookmarkService", function() {
         validShareSet: defaultDomain.validShareSet
       };
 
-    bsc.createBookmark(body, params, {
+    bsc.create(body, params, {
       MODEL_ERR: function(err) {
         should.not.exist(err);
       },
@@ -131,7 +131,7 @@ describe("BookmarkService", function() {
         validShareSet: defaultDomain.validShareSet
       };
 
-    bsc.createBookmark(body, params, {
+    bsc.create(body, params, {
       MODEL_ERR: function(err) {
         err.should.not.be.null;
         done();
@@ -155,7 +155,7 @@ describe("BookmarkService", function() {
         validShareSet: defaultDomain.validShareSet
       };
 
-    bsc.createBookmark(body, params, {
+    bsc.create(body, params, {
       MODEL_ERR: function(err) {
         should.not.exist(err);
       },
@@ -168,7 +168,7 @@ describe("BookmarkService", function() {
   });
 
   it("find should fail in model with invalid objectid", function(done) {
-    bsc.findSingleBookmark('dfdf', userFixture.outsider._id, {
+    bsc.findSingle('dfdf', userFixture.outsider._id, {
       MODEL_ERR: function(err) {
         err.should.not.be.null;
         done();
@@ -184,7 +184,7 @@ describe("BookmarkService", function() {
   it("find should not return Bookmark created by different user", function(done) {
     var url = encodeURIComponent("some/url#id42");
 
-    bsc.findSingleBookmark(bookmarks[url].data.id, userFixture.outsider._id, {
+    bsc.findSingle(bookmarks[url].data.id, userFixture.outsider._id, {
       MODEL_ERR: function(err) {
         should.not.exist(err);
       },
@@ -199,7 +199,7 @@ describe("BookmarkService", function() {
   it("find should return Bookmark created by user", function(done) {
     var url = encodeURIComponent("some/url#id42");
 
-    bsc.findSingleBookmark(bookmarks[url].data.id, loggedInUser._id, {
+    bsc.findSingle(bookmarks[url].data.id, loggedInUser._id, {
       MODEL_ERR: function(err) {
         should.not.exist(err);
       },
@@ -219,7 +219,6 @@ describe("BookmarkService", function() {
         userId: 'svada',
         domainName: defaultDomain.domainName
       };
-
     bsc.overview(encHref, params, {
       MODEL_ERR: function(err) {
         err.should.not.be.null;
@@ -273,7 +272,7 @@ describe("BookmarkService", function() {
       domainName: defaultDomain.domainName
     };
 
-    bsc.searchBookmarks({}, params, {
+    bsc.search({}, params, {
       MODEL_ERR: function(err) {
         err.should.not.be.null;
         done();
@@ -293,7 +292,7 @@ describe("BookmarkService", function() {
       };
 
 
-    bsc.searchBookmarks(query, params, {
+    bsc.search(query, params, {
       MODEL_ERR: function(err) {
       },
       DEFAULT: function(result) {
@@ -313,7 +312,7 @@ describe("BookmarkService", function() {
       };
 
 
-    bsc.searchBookmarks(query, params, {
+    bsc.search(query, params, {
       MODEL_ERR: function(err) {
       },
       DEFAULT: function(result) {
@@ -334,7 +333,7 @@ describe("BookmarkService", function() {
       };
 
 
-    bsc.searchBookmarks(query, params, {
+    bsc.search(query, params, {
       MODEL_ERR: function(err) {
       },
       DEFAULT: function(result) {
@@ -346,7 +345,7 @@ describe("BookmarkService", function() {
 
 
   it("trash should fail in model", function(done) {
-    bsc.trashBookmark("svada", loggedInUser._id, {
+    bsc.trash("svada", loggedInUser._id, {
       MODEL_ERR: function(err) {
         err.should.not.be.null;
         done();
@@ -363,7 +362,7 @@ describe("BookmarkService", function() {
     var url = encodeURIComponent("some/url#id42"),
       bookmarkId = bookmarks[url].data.id;
 
-    bsc.trashBookmark(bookmarkId, userFixture.outsider._id, {
+    bsc.trash(bookmarkId, userFixture.outsider._id, {
       MODEL_ERR: function(err) {
         should.not.exist(err);
       },
@@ -379,7 +378,7 @@ describe("BookmarkService", function() {
     var url = encodeURIComponent("some/url#id42"),
       bookmarkId = bookmarks[url].data.id;
 
-    bsc.trashBookmark(bookmarkId, loggedInUser._id, {
+    bsc.trash(bookmarkId, loggedInUser._id, {
       MODEL_ERR: function(err) {
         should.not.exist(err);
       },
@@ -404,7 +403,7 @@ describe("BookmarkService", function() {
       };
 
 
-    bsc.searchBookmarks(query, params, {
+    bsc.search(query, params, {
       MODEL_ERR: function(err) {
       },
       DEFAULT: function(result) {
@@ -416,7 +415,7 @@ describe("BookmarkService", function() {
 
 
   it("delete should fail in model", function(done) {
-    bsc.deleteTrashedBookmark("svada", loggedInUser._id, {
+    bsc.deleteTrashed("svada", loggedInUser._id, {
       MODEL_ERR: function(err) {
         err.should.not.be.null;
         done();
@@ -432,7 +431,7 @@ describe("BookmarkService", function() {
     var url = encodeURIComponent("some/url#id42"),
       bookmarkId = bookmarks[url].data.id;
 
-    bsc.deleteTrashedBookmark(bookmarkId, userFixture.outsider._id, {
+    bsc.deleteTrashed(bookmarkId, userFixture.outsider._id, {
       MODEL_ERR: function(err) {
         should.not.exist(err);
       },
@@ -448,7 +447,7 @@ describe("BookmarkService", function() {
     var url = encodeURIComponent("some/url#id42"),
       bookmarkId = bookmarks[url].data.id;
 
-    bsc.deleteTrashedBookmark(bookmarkId, loggedInUser._id, {
+    bsc.deleteTrashed(bookmarkId, loggedInUser._id, {
       MODEL_ERR: function(err) {
         should.not.exist(err);
       },
@@ -461,7 +460,7 @@ describe("BookmarkService", function() {
   });
 
   it("delete user annots should fail in model", function(done) {
-    bsc.deleteUserBookmarks("svada", defaultDomain.domainName, {
+    bsc.deleteUser("svada", defaultDomain.domainName, {
       MODEL_ERR: function(err) {
         err.should.not.be.null;
         done();
@@ -472,7 +471,7 @@ describe("BookmarkService", function() {
   });
 
   it("delete user annots should be ok", function(done) {
-    bsc.deleteUserBookmarks(loggedInUser._id, defaultDomain.domainName, {
+    bsc.deleteUser(loggedInUser._id, defaultDomain.domainName, {
       MODEL_ERR: function(err) {
         should.not.exist(err);
       },
@@ -489,7 +488,7 @@ describe("BookmarkService", function() {
     var failingDBURI = "mongodb://localhost:27018/test_bookmarks";
     var failingBSC = new BookmarkService(failingDBURI);
 
-    failingBSC.createBookmark(failingBody, params, {
+    failingBSC.create(failingBody, params, {
       MODEL_ERR: function(err) {
         err.should.not.be.null;
         done();

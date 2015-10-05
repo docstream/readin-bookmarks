@@ -26,7 +26,7 @@ class BookmarkService
   #   MODEL_ERR: cb(err)
   #   DEFAULT: cb(res)
   # }
-  createBookmark: (data, params, cbHash) ->
+  create: (data, params, cbHash) ->
     bookmarkData = data
     bookmarkData.endUser = params.userId
 
@@ -41,7 +41,7 @@ class BookmarkService
   #   NOT_FOUND: cb()
   #   DEFAULT: cb(res)
   # }
-  findSingleBookmark: (id, userId, cbHash) ->
+  findSingle: (id, userId, cbHash) ->
     params = {
       endUser: userId
       _id: id
@@ -60,7 +60,7 @@ class BookmarkService
   #   NOT_FOUND: cb()
   #   DEFAULT: cb(res)
   # }
-  trashBookmark: (id, userId, cbHash) ->
+  trash: (id, userId, cbHash) ->
     params =
       _id: id
       endUser: userId
@@ -78,7 +78,7 @@ class BookmarkService
   #   NOT_FOUND: cb()
   #   DELETED: cb()
   # }
-  deleteTrashedBookmark: (id, userId, cbHash) ->
+  deleteTrashed: (id, userId, cbHash) ->
     query =
       _id: id
       endUser: userId
@@ -100,7 +100,7 @@ class BookmarkService
   #   MODEL_ERR: cb(err)
   #   DELETED: cb()
   # }
-  deleteUserBookmarks: (userId, domainName, cbHash) ->
+  deleteUser: (userId, domainName, cbHash) ->
     query =
       endUser: userId
       domainName: domainName
@@ -141,12 +141,12 @@ class BookmarkService
   #   MODEL_ERR: cb(err)
   #   DEFAULT: cb(res)
   # }
-  searchBookmarks: (query, params, cbHash) ->
+  search: (query, params, cbHash) ->
     params =
       endUser: params.userId
       domainName: params.domainName
 
-    Bookmark.searchBookmarks params, query, (err, result) =>
+    Bookmark.search params, query, (err, result) =>
       if err
         cbHash.MODEL_ERR err
       else

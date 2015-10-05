@@ -72,7 +72,7 @@ bookmarkSchema.statics.overview = (params, cb) ->
 
   @.find(query, cb)
 
-bookmarkSchema.statics.searchBookmarks = (params, query, cb) ->
+bookmarkSchema.statics.search = (params, query, cb) ->
   dbQuery = {
     endUser: params.endUser
     domainName: params.domainName
