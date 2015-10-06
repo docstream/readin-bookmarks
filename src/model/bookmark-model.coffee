@@ -70,7 +70,27 @@ bookmarkSchema.statics.overview = (params, cb) ->
     urlFragFree: params.urlFragFree
   }
 
-  @.find(query, cb)
+  try
+    aggregateQuery = [
+      { $match:
+        {
+          endUser: mongoose.Types.ObjectId(params.endUser)
+          domainName: params.domainName
+          urlFragFree: params.urlFragFree
+          deleted: false
+        }
+      },
+      { $group:
+        {
+          _id: "$urlFrag",
+          count: {$sum: 1}
+        }
+      }
+    ]
+
+    @.aggregate aggregateQuery, cb
+  catch error
+    cb error
 
 bookmarkSchema.statics.search = (params, query, cb) ->
   dbQuery = {

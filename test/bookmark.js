@@ -260,6 +260,7 @@ describe("BookmarkService", function() {
         should.not.exist(err);
       },
       DEFAULT: function(res) {
+        console.log('res ', res);
         res.data.totalCount.should.equal(1);
         done();
       }

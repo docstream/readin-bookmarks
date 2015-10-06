@@ -133,6 +133,7 @@ class BookmarkService
         totalCount = 0
         cleanedResult = {}
         _.each result, (row) ->
+          console.log 'row ', row
           totalCount += row.count
           cleanedResult[row._id] = {fragmIdentUrl: '#' + row._id, count:  row.count }
 
