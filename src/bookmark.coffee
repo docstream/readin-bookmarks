@@ -130,7 +130,13 @@ class BookmarkService
       if err
         cbHash.MODEL_ERR err
       else
-        cbHash.DEFAULT {data: {totalCount: result.length}, embeds: result}
+        totalCount = 0
+        cleanedResult = {}
+        _.each result, (row) ->
+          totalCount += row.count
+          cleanedResult[row._id] = {fragmIdentUrl: '#' + row._id, count:  row.count }
+
+        cbHash.DEFAULT {data: {totalCount: totalCount}, embeds: {ids:  cleanedResult }}
 
 
   # params = {
