@@ -97,6 +97,8 @@ bookmarkSchema.statics.search = (params, query, cb) ->
     endUser: params.endUser
     domainName: params.domainName
     deleted: false
+    urlFragFree: query.urlFragFree
+    urlFrag: query.urlFrag
   }
 
   if query.filter
