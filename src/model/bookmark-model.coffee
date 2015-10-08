@@ -12,7 +12,7 @@ bookmarkSchema = Schema({
   deleted: {type: Boolean, default: false}
 })
 
-uniqueIndex = { urlFragFree:1, urlFragFree:1 ,domainName:1, endUser:1 }
+uniqueIndex = { urlFragFree:1, urlFrag:1 ,domainName:1, endUser:1 }
 bookmarkSchema.index uniqueIndex, { unique:true }
 
 bookmarkSchema.set('toObject', { virtuals: true });
