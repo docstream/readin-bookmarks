@@ -345,78 +345,8 @@ describe("BookmarkService", function() {
   });
 
 
-  it("trash should fail in model", function(done) {
-    bsc.trash("svada", loggedInUser._id, {
-      MODEL_ERR: function(err) {
-        err.should.not.be.null;
-        done();
-      },
-      NOT_FOUND: function() {
-      },
-      DEFAULT: function(res) {
-      }
-    });
-  });
-
-
-  it("trash should fail when wrong user", function(done) {
-    var url = encodeURIComponent("some/url#id42"),
-      bookmarkId = bookmarks[url].data.id;
-
-    bsc.trash(bookmarkId, userFixture.outsider._id, {
-      MODEL_ERR: function(err) {
-        should.not.exist(err);
-      },
-      NOT_FOUND: function() {
-        done();
-      },
-      DEFAULT: function(res) {
-      }
-    });
-  });
-
-  it("trash should be ok", function(done) {
-    var url = encodeURIComponent("some/url#id42"),
-      bookmarkId = bookmarks[url].data.id;
-
-    bsc.trash(bookmarkId, loggedInUser._id, {
-      MODEL_ERR: function(err) {
-        should.not.exist(err);
-      },
-      NOT_FOUND: function() {
-      },
-      DEFAULT: function(res) {
-        assert.notDeepEqual(res, {});
-        res.data.deleted.should.be.ok;
-        done();
-      }
-    });
-  });
-
-  it("search should return result with filter=deleted", function(done) {
-    var params = {
-        userId: loggedInUser._id,
-        domainName: defaultDomain.domainName
-      },
-      query = {
-        page: 1,
-        filter: "deleted"
-      };
-
-
-    bsc.search(query, params, {
-      MODEL_ERR: function(err) {
-      },
-      DEFAULT: function(result) {
-        result.embeds.bookmarks.length.should.equal(1);
-        done();
-      }
-    });
-  });
-
-
   it("delete should fail in model", function(done) {
-    bsc.deleteTrashed("svada", loggedInUser._id, {
+    bsc.delete("svada", loggedInUser._id, {
       MODEL_ERR: function(err) {
         err.should.not.be.null;
         done();
@@ -432,7 +362,7 @@ describe("BookmarkService", function() {
     var url = encodeURIComponent("some/url#id42"),
       bookmarkId = bookmarks[url].data.id;
 
-    bsc.deleteTrashed(bookmarkId, userFixture.outsider._id, {
+    bsc.delete(bookmarkId, userFixture.outsider._id, {
       MODEL_ERR: function(err) {
         should.not.exist(err);
       },
@@ -448,7 +378,7 @@ describe("BookmarkService", function() {
     var url = encodeURIComponent("some/url#id42"),
       bookmarkId = bookmarks[url].data.id;
 
-    bsc.deleteTrashed(bookmarkId, loggedInUser._id, {
+    bsc.delete(bookmarkId, loggedInUser._id, {
       MODEL_ERR: function(err) {
         should.not.exist(err);
       },

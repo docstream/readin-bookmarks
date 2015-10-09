@@ -9,7 +9,6 @@ bookmarkSchema = Schema({
   urlFrag: String
   title: {type: String, required: true}
   created: {type: Date, default: Date.now}
-  deleted: {type: Boolean, default: false}
 })
 
 uniqueIndex = { urlFragFree:1, urlFrag:1 ,domainName:1, endUser:1 }
@@ -43,25 +42,9 @@ bookmarkSchema.statics.findSingle = (params, cb) ->
   query = {
     endUser: params.endUser
     _id: params._id
-    deleted: false
   }
 
   @.findOne(query, cb)
-
-bookmarkSchema.statics.trashSingle = (params, cb) ->
-  updateData = {
-    deleted: true
-  }
-  query = {
-    endUser: params.endUser
-    _id: params._id
-  }
-  # NB! Oppdatert fom v4, må sende med denne for å få tilbake oppdatert dokumentet
-  options = {
-    new: true
-  }
-
-  @.findOneAndUpdate query, updateData, options, cb
 
 bookmarkSchema.statics.overview = (params, cb) ->
   query = {
@@ -77,7 +60,6 @@ bookmarkSchema.statics.overview = (params, cb) ->
           endUser: mongoose.Types.ObjectId(params.endUser)
           domainName: params.domainName
           urlFragFree: params.urlFragFree
-          deleted: false
         }
       },
       { $group:
@@ -96,18 +78,12 @@ bookmarkSchema.statics.search = (params, query, cb) ->
   dbQuery = {
     endUser: params.endUser
     domainName: params.domainName
-    deleted: false
   }
 
   if query.urlFragFree
     dbQuery.urlFragFree = query.urlFragFree
   if query.urlFrag
     dbQuery.urlFrag = query.urlFrag
-
-  if query.filter
-    switch query.filter
-      when "deleted"
-        dbQuery.deleted = true
 
   if query.page
     absoluteMax = 50

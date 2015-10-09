@@ -58,31 +58,12 @@ class BookmarkService
   # cbHash = {
   #   MODEL_ERR: cb(err)
   #   NOT_FOUND: cb()
-  #   DEFAULT: cb(res)
-  # }
-  trash: (id, userId, cbHash) ->
-    params =
-      _id: id
-      endUser: userId
-
-    Bookmark.trashSingle params, (err, trashedBookmark) ->
-      if err
-        cbHash.MODEL_ERR err
-      else if trashedBookmark == null
-        cbHash.NOT_FOUND()
-      else
-        cbHash.DEFAULT {data: trashedBookmark.toObject()}
-
-  # cbHash = {
-  #   MODEL_ERR: cb(err)
-  #   NOT_FOUND: cb()
   #   DELETED: cb()
   # }
-  deleteTrashed: (id, userId, cbHash) ->
+  delete: (id, userId, cbHash) ->
     query =
       _id: id
       endUser: userId
-      deleted: true
 
     Bookmark.findOne query, (err, bookmark) ->
       if err
