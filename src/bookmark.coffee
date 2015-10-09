@@ -12,10 +12,38 @@ class BookmarkService
 
     Bookmark = require('./model/bookmark-model')(@conn)
 
-    #TODO: View helper
+    @viewHelpers = [
+      {name: 'myBookmarks', fn: @myRecords}
+    ]
 
   close: ->
     @conn.close()
+
+  # View helper for listing of my records, DO NOT USE anywhere else!
+  myRecords: (options, cb) =>
+    query = {
+      page: options.page
+      max: options.max
+    }
+
+    params = {
+      endUser: options.userId
+      domainName: options.domainName
+    }
+
+    Bookmark.search params, query, (err, result) =>
+      if err
+        cb err
+      else
+        bookmarks = if query.page then result.bookmarks else result
+        embedParams =
+          paging: (if query.page then true else false)
+          totalCount: result.totalCount
+          page: result.page
+          pageSize: result.pageSize
+          filter: if query.filter then query.filter else ""
+
+        cb null, appendSearchData(bookmarks, embedParams)
 
 
   # data = { see model }
