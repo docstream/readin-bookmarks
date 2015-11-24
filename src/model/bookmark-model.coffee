@@ -20,6 +20,13 @@ bookmarkSchema.virtual('encURI').get ->
   encURI = encodeURIComponent "#{@urlFragFree}##{@urlFrag}"
   encURI
 
+bookmarkSchema.virtual('ebookId').get ->
+  split = @urlFragFree.split('/')
+  if split.length >= 3
+    split[2]
+  else
+    ""
+
 bookmarkSchema.virtual('formatedCreatedDate').get ->
   date = new Date @created
   m = (date.getMonth()+1)
