@@ -28,7 +28,7 @@ bookmarkSchema.virtual('formatedCreatedDate').get ->
   d = date.getDate()
   day = if d < 10 then "0#{d}" else d
 
-  "#{date.getFullYear()}-#{month}-#{day}"
+  "#{day}-#{month}-#{date.getFullYear()}"
 
 bookmarkSchema.statics.create = (data, cb) ->
   bookmark = new Bookmark(data)
