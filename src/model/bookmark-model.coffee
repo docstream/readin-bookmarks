@@ -20,6 +20,7 @@ bookmarkSchema.virtual('encURI').get ->
   encURI = encodeURIComponent "#{@urlFragFree}##{@urlFrag}"
   encURI
 
+# @deprecated
 bookmarkSchema.virtual('ebookId').get ->
   split = @urlFragFree.split('/')
   if split.length >= 3
