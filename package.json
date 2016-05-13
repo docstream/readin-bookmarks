@@ -1,6 +1,6 @@
 {
   "name": "ds3g-bookmarks",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./lib/bookmark.js",
   "scripts": {
     "postinstall": "npm run compile",
