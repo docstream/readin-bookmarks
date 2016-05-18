@@ -3,8 +3,8 @@
   "version": "1.0.1",
   "main": "./lib/bookmark.js",
   "scripts": {
-    "postinstall": "npm run compile",
-    "pretest" : "npm run compile",
+    "pretest": "node_modules/.bin/coffee --bare --compile --output lib/ src/",
+    "postinstall": "node_modules/.bin/coffee --bare --compile --output lib/ src/",
     "compile": "node_modules/.bin/coffee --bare --compile --output lib/ src/",
     "test": "PATH=./node_modules/.bin:$PATH grunt"
   },
