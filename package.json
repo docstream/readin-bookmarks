@@ -1,6 +1,6 @@
 {
   "name": "ds3g-bookmarks",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "./lib/bookmark.js",
   "scripts": {
     "pretest": "node_modules/.bin/coffee --bare --compile --output lib/ src/",
