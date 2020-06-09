@@ -1,6 +1,6 @@
 {
   "name": "ds3g-bookmarks",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "main": "./lib/bookmark.js",
   "scripts": {
     "pretest": "coffee --bare --compile --output lib/ src/",
@@ -9,7 +9,7 @@
     "test": ""
   },
   "dependencies": {
-    "mongoose": "4.3.6",
+    "mongoose": "^4.3.17",
     "underscore": "1.8.3"
   },
   "devDependencies": {
