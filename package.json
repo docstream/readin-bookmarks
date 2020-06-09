@@ -22,7 +22,7 @@
     "grunt-env": "^0.4.1",
     "grunt-istanbul": "^0.2.5",
     "grunt-mocha-test": "^0.13.3",
-    "lodash": "2.4.1",
+    "lodash": "4.17.15",
     "proxyquire": "0.6.0",
     "should": "~1.3.0"
   }
