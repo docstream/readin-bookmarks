@@ -7,8 +7,8 @@ class BookmarkService
   Bookmark = null
 
   constructor: (url) ->
-    console.log "**********************************"
-    console.log url
+    console.log "*************** BookmarkService *******************"
+    console.log "url: ", url
     console.log "-----------------------------------"
     @conn = mongoose.createConnection url
     monitorConn @conn
@@ -35,6 +35,12 @@ class BookmarkService
     }
 
     Bookmark.search params, query, (err, result) =>
+      console.log "****************** Bookmark.search *************************"
+      console.log "params: ", params
+      console.log "query: ", query
+      console.log "err: ", err
+      console.log "result: ", result
+      console.log "------------------------------------------------------------"
       if err
         cb err
       else
@@ -184,6 +190,10 @@ class BookmarkService
 
   #Privates
   appendSearchData = (bookmarks, params) ->
+    console.log "******************** appendSearchData *********************"
+    console.log "bookmarks: ", bookmarks
+    console.log "params: ", params
+    console.log "-----------------------------------------------------------"
     if params.paging
       radix = 10
       totalCount = parseInt(params.totalCount, radix)
