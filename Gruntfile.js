@@ -72,7 +72,7 @@ module.exports = function (grunt) {
         tagMessage: 'tagging new ver %VERSION%',
         push: false
       }
-    }  
+    }
   });
 
   grunt.loadNpmTasks('grunt-mocha-test');

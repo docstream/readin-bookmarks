@@ -1,12 +1,12 @@
 {
   "name": "ds3g-bookmarks",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "./lib/bookmark.js",
   "scripts": {
     "pretest": "coffee --bare --compile --output lib/ src/",
     "postinstall": "coffee --bare --compile --output lib/ src/",
     "compile": "coffee --bare --compile --output lib/ src/",
-    "test": "grunt"
+    "test": ""
   },
   "dependencies": {
     "mongoose": "4.3.6",
@@ -20,7 +20,6 @@
     "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-env": "^0.4.1",
-    "grunt-istanbul": "^0.2.5",
     "grunt-mocha-test": "^0.13.3",
     "lodash": "2.4.1",
     "proxyquire": "0.6.0",
