@@ -7,9 +7,6 @@ class BookmarkService
   Bookmark = null
 
   constructor: (url) ->
-    console.log "*************** BookmarkService - constructor *******************"
-    console.log "url: ", url
-    console.log "-----------------------------------"
     @conn = mongoose.createConnection url
     monitorConn @conn
 
@@ -20,12 +17,10 @@ class BookmarkService
     ]
 
   close: ->
-    console.log "*************** BookmarkService - Close *******************"
     @conn.close()
 
   # View helper for listing of my records, DO NOT USE anywhere else!
   myRecords: (options, cb) =>
-    console.log "*************** BookmarkService - myRecords *******************"
     query = {
       page: options.page
       max: options.max
@@ -37,12 +32,6 @@ class BookmarkService
     }
 
     Bookmark.search params, query, (err, result) =>
-      console.log "****************** Bookmark.search *************************"
-      console.log "params: ", params
-      console.log "query: ", query
-      console.log "err: ", err
-      console.log "result: ", result
-      console.log "------------------------------------------------------------"
       if err
         cb err
       else
@@ -66,7 +55,6 @@ class BookmarkService
   #   DEFAULT: cb(res)
   # }
   create: (data, params, cbHash) ->
-    console.log "*************** BookmarkService - create *******************"
     bookmarkData = data
     bookmarkData.endUser = params.userId
 
@@ -82,7 +70,6 @@ class BookmarkService
   #   DEFAULT: cb(res)
   # }
   findSingle: (id, userId, cbHash) ->
-    console.log "*************** BookmarkService - findSingle *******************"
     params = {
       endUser: userId
       _id: id
@@ -102,7 +89,6 @@ class BookmarkService
   #   DELETED: cb()
   # }
   delete: (id, userId, cbHash) ->
-    console.log "*************** BookmarkService - delete *******************"
     query =
       _id: id
       endUser: userId
@@ -124,7 +110,6 @@ class BookmarkService
   #   DELETED: cb()
   # }
   deleteUser: (userId, domainName, cbHash) ->
-    console.log "*************** BookmarkService - deleteUser *******************"
     query =
       endUser: userId
       domainName: domainName
@@ -145,7 +130,6 @@ class BookmarkService
   #   DEFAULT: cb(res)
   # }
   overview: (encHref, params, cbHash) ->
-    console.log "*************** BookmarkService - overview *******************"
     modParams =
       urlFragFree: decodeURIComponent(encHref)
       endUser: params.userId.toString()
@@ -174,7 +158,6 @@ class BookmarkService
   #   DEFAULT: cb(res)
   # }
   search: (query, params, cbHash) ->
-    console.log "*************** BookmarkService - search *******************"
     params =
       endUser: params.userId
       domainName: params.domainName
@@ -198,10 +181,6 @@ class BookmarkService
 
   #Privates
   appendSearchData = (bookmarks, params) ->
-    console.log "******************** appendSearchData *********************"
-    console.log "bookmarks: ", bookmarks
-    console.log "params: ", params
-    console.log "-----------------------------------------------------------"
     if params.paging
       radix = 10
       totalCount = parseInt(params.totalCount, radix)
