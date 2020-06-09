@@ -7,6 +7,9 @@ class BookmarkService
   Bookmark = null
 
   constructor: (url) ->
+    console.log "**********************************"
+    console.log url
+    console.log "-----------------------------------"
     @conn = mongoose.createConnection url
     monitorConn @conn
 
