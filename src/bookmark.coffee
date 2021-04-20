@@ -54,11 +54,9 @@ class BookmarkService
   #   MODEL_ERR: cb(err)
   #   DEFAULT: cb(res)
   # }
-  create: (data, params, cbHash) ->
-    bookmarkData = data
-    bookmarkData.endUser = params.userId
+  create: (data, cbHash) ->
 
-    Bookmark.create bookmarkData, (err, bookmark) ->
+    Bookmark.create data, (err, bookmark) ->
       if err
         cbHash.MODEL_ERR err
       else
